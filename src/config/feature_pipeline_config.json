@@ -1,0 +1,40 @@
+{
+  "files": {
+    "excel_filename": "riseapp_hot_topics.xlsx",
+    "transcripts_filename": "rise_app_data_with_transcripts.csv",
+    "output_filename": "rise_app_clean.csv",
+    "dropped_filename": "dropped_rows.csv"
+  },
+  "cleaning": {
+    "text_column": "transcript",
+    "min_length": 80,
+    "unique_ratio": 0.3
+  },
+  "processing": {
+    "url_pattern": "(https?://\\S+)",
+    "social_network_filter": ["Instagram"],
+    "final_columns": [
+      "id",
+      "main_subject",
+      "sub_topic",
+      "question",
+      "link_cleaned",
+      "transcript"
+    ]
+  },
+  "social_networks": {
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "facebook": "Facebook",
+    "youtube": "YouTube",
+    "twitter": "X (Twitter)",
+    "linkedin": "LinkedIn",
+    "telegram": "Telegram"
+  },
+  "defaults": {
+    "sub_topic": "General",
+    "unknown_question": "Unknown Question",
+    "no_link_network": "No Link",
+    "other_network": "Other"
+  }
+}
