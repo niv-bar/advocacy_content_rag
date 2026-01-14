@@ -10,4 +10,9 @@ dependencies = [
     "pydantic>=2.12.5",
     "pydantic-settings>=2.12.0",
     "python-dotenv>=1.2.1",
+    "qdrant-client>=1.16.2",
+    "streamlit>=1.52.2",
+    "torch==2.2.2",
+    "tqdm>=4.67.1",
+    "transformers>=4.57.5",
 ]

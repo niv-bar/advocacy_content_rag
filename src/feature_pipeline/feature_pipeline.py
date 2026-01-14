@@ -1,6 +1,7 @@
 """Feature Pipeline: Merge -> Clean -> Save"""
 import os
 import pandas as pd
+import hashlib
 
 from src.feature_pipeline.data_normalization import ExcelLoader
 from src.feature_pipeline.cleaning import TranscriptCleaner
@@ -25,7 +26,7 @@ class FeaturePipeline:
         self.dropped_path = os.path.join(settings.DATA_DIR, dropped_filename)
 
         self.cleaner = TranscriptCleaner(text_col="transcript")
-        self._final_cols = ['id', 'main_subject', 'sub_topic', 'question', 'link_cleaned', 'transcript']
+        self._final_cols = ['id', 'link_id', 'main_subject', 'sub_topic', 'question', 'link_cleaned', 'transcript']
 
     def run(self) -> pd.DataFrame:
         """Execute the full pipeline."""
@@ -101,6 +102,10 @@ class FeaturePipeline:
 
         # Normalize missing question values
         df['question'] = df['question'].replace(['missing question', 'Unknown Question'], pd.NA)
+
+        df["link_id"] = df["link_cleaned"].apply(
+            lambda x: int(hashlib.sha256(x.encode()).hexdigest()[:16], 16)
+        )
 
         return df
 
